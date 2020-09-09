@@ -8,6 +8,7 @@ RUN adduser -D -u 1000 borg && \
     sed -i \
         -e 's/^#PasswordAuthentication yes$/PasswordAuthentication no/g' \
         -e 's/^PermitRootLogin without-password$/PermitRootLogin no/g' \
+        -e 's/AuthorizedKeysFile.*/AuthorizedKeysFile  \.ssh\/authorized_keys \/etc\/authorized_keys\/%u/' \
         /etc/ssh/sshd_config
 COPY supervisord.conf /etc/supervisord.conf
 COPY service.sh /usr/local/bin/service.sh
